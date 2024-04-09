@@ -13,12 +13,10 @@ make_sidebar()
 st.markdown(" <style> div[class^='block-container'] { padding-top: 2rem; } </style> ", unsafe_allow_html=True)
 st.write("# Procedència donants trasplantaments pulmonars")
 
-resp_filter3= st.sidebar.multiselect("Selecciona el tipus de donant", options=['ME', 'DAC'], default=['ME', 'DAC'])
-
 data = pd.read_csv("PULMONS.csv", sep=";", header=0, quoting=csv.QUOTE_NONE,index_col=False, on_bad_lines="warn")
 
 data = data[data["RESPOSTA"]=="Acceptat i trasplantat"]
-data = data[data['TIPUS'].isin(resp_filter3)]
+
 color_scale = alt.Scale(domain=['Acceptat i trasplantat', 'Acceptat i no trasplantat',
                                 'No acceptat'],
                         range=['#09AC42', '#A9EAC0', '#AC220F'])
